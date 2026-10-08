@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi tienda</title>
+  <style>
+    :root {
+      --fondo: #F1F7EC;
+      --verde-menta: #DDEBD0;
+      --verde-claro: #A9D18E;
+      --verde-hoja: #2F6B3A;
+      --verde-oscuro: #1F3B27;
+      --tierra: #6B4A32;
+      --terracota: #9C4A2F;
+      --borde: #C9DDB8;
+    }
+
+    body {
+      font-family: system-ui, Arial, sans-serif;
+      background-color: var(--fondo);
+      color: var(--verde-oscuro);
+      padding: 20px;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      color: var(--verde-hoja);
+      margin-bottom: 8px;
+    }
+
+    .slogan {
+      color: #4B6150;
+      font-size: 17px;
+      margin-top: 0;
+      margin-bottom: 25px;
+    }
+
+    /* Beneficios de la tienda */
+
+    .beneficios {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+
+      background-color: var(--verde-hoja);
+      color: white;
+      border-bottom: 4px solid var(--verde-claro);
+
+      padding: 14px;
+      margin-bottom: 30px;
+    }
+
+    .beneficios span {
+      font-size: 14px;
+    }
+
+    /* Catálogo */
+
+    #productos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .producto {
+      border: 1px solid var(--borde);
+      background: white;
+      border-radius: 8px;
+      padding: 10px;
+      width: 220px;
+      vertical-align: top;
+    }
+
+    .producto img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 4px;
+      background-color: var(--verde-menta);
+    }
+
+    .producto h3 {
+      margin-bottom: 8px;
+      color: var(--verde-hoja);
+    }
+
+    .descripcion {
+      font-size: 14px;
+      color: #4B6150;
+      min-height: 42px;
+    }
+
+    .precio {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--tierra);
+    }
+
+    /* Botones */
+
+    .producto button {
+      background-color: var(--verde-claro);
+      border: none;
+      color: var(--verde-oscuro);
+      font-weight: bold;
+      padding: 9px 12px;
+      margin-top: 5px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .producto button:hover {
+      opacity: 0.85;
+    }
+
+    /* Carrito */
+
+    .carrito {
+      margin-top: 35px;
+      padding: 20px;
+      background: white;
+      border: 1px solid var(--borde);
+      border-top: 4px solid var(--verde-claro);
+      border-radius: 8px;
+      text-align: left;
+      display: inline-block;
+      min-width: 320px;
+    }
+
+    .carrito h2 {
+      margin-top: 0;
+      color: var(--verde-hoja);
+    }
+
+    #lista-carrito {
+      padding-left: 20px;
+    }
+
+    #lista-carrito li {
+      margin-bottom: 8px;
+    }
+
+    .resumen {
+      border-top: 1px solid var(--borde);
+      margin-top: 15px;
+      padding-top: 10px;
+    }
+
+    .total {
+      font-size: 19px;
+      color: var(--verde-hoja);
+    }
+
+    /* Botón vaciar */
+
+    .vaciar {
+      background-color: var(--terracota);
+      border: none;
+      color: white;
+      padding: 9px 12px;
+      margin-top: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Botón finalizar */
+
+    .finalizar {
+      background-color: var(--verde-hoja);
+      border: none;
+      color: white;
+      padding: 9px 12px;
+      margin-top: 10px;
+      margin-left: 5px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .vaciar:hover,
+    .finalizar:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+  <!DOCTYPE html>
+  <html lang="es">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Encanto Colombiano | Termos Montaña</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paramo: #12372a;
+      --bosque: #1d5a43;
+      --frailejon: #a9b98a;
+      --niebla: #eaf0ec;
+      --tinto: #4a2e1f;
+      --aji: #c8352b;
+      --texto: #1b2a23;
+      --display: "Fraunces", Georgia, serif;
+      --cuerpo: "DM Sans", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: var(--cuerpo);
+      color: var(--texto);
+      background: var(--niebla);
+      line-height: 1.5;
+    }
+
+    /* ---------- HEADER ---------- */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--paramo) 0%, #1a4a38 100%);
+      color: #fff;
+      padding: 56px 20px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 7vw, 4.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+
+    .hero .marca-sub {
+      display: block;
+      margin-top: 8px;
+      font-family: var(--cuerpo);
+      font-weight: 500;
+      font-size: clamp(.95rem, 2.4vw, 1.1rem);
+      letter-spacing: .02em;
+      color: var(--frailejon);
+    }
+
+    .slogan {
+      max-width: 34ch;
+      margin: 20px auto 0;
+      font-size: clamp(1.05rem, 3vw, 1.3rem);
+      color: #e6efe9;
+    }
+
+    .beneficios {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 28px auto 0;
+      max-width: 760px;
+    }
+
+    .beneficios span {
+      padding: 8px 16px;
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .07);
+      font-size: .92rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .cordillera {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin-top: 36px;
+    }
+
+    .cordillera .nombre {
+      font-family: var(--cuerpo);
+      font-size: 11px;
+      font-weight: 500;
+      fill: #d7e3da;
+      text-anchor: middle;
+    }
+
+    /* ---------- PRODUCTOS ---------- */
+    #productos {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    /* ---------- CARRITO ---------- */
+    .carrito {
+      max-width: 640px;
+      margin: 0 auto 48px;
+      padding: 24px;
+      background: #fff;
+      border-radius: 14px;
+      border: 1px solid #cfdcd3;
+    }
+
+    .carrito h2 {
+      margin: 0 0 12px;
+      font-family: var(--display);
+      color: var(--paramo);
+    }
+
+    #lista-carrito { list-style: none; margin: 0; padding: 0; }
+
+    .resumen { border-top: 1px solid #dfe8e2; margin-top: 16px; padding-top: 8px; }
+    .resumen p { margin: 6px 0; }
+    .total { font-size: 1.3rem; font-weight: 700; color: var(--paramo); }
+
+    .carrito button {
+      font: inherit;
+      font-weight: 700;
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      margin: 12px 8px 0 0;
+    }
+
+    .vaciar { background: #fff; color: var(--tinto); border-color: var(--tinto); }
+    .finalizar { background: var(--aji); color: #fff; }
+
+    .carrito button:focus-visible,
+    .carrito button:hover { outline: 3px solid var(--frailejon); outline-offset: 2px; }
+
+    @media (max-width: 480px) {
+      .beneficios span { white-space: normal; }
+    }
+  </style>
+  </head>
+  <body>
+
+  <header class="hero">
+    <h1>
+      Encanto Colombiano
+      <span class="marca-sub">Juan Valdez · Línea Termos Montaña</span>
+    </h1>
+
+    <p class="slogan">
+      Termos Montaña: el café de cada región, a donde tú vayas ☕
+    </p>
+
+    <div class="beneficios">
+      <span>🚚 Envíos en Bogotá</span>
+      <span>🔒 Compra segura</span>
+      <span>📦 Seguimiento de pedido</span>
+    </div>
+
+    <!-- Cordillera: una cumbre por cada termo de la línea -->
+    <svg class="cordillera" viewBox="0 0 1000 150" preserveAspectRatio="none" role="img" aria-label="Cordillera con las cinco regiones de la línea Montaña">
+      <path d="M0 150 L0 100 L90 60 L170 95 L260 45 L350 90 L440 30 L530 85 L620 50 L710 92 L800 40 L890 85 L1000 55 L1000 150 Z" fill="#1d5a43" opacity=".55"/>
+      <path d="M0 150 L0 118 L120 78 L220 112 L330 70 L430 108 L540 62 L650 110 L760 74 L860 108 L940 84 L1000 100 L1000 150 Z" fill="#2c7556" opacity=".8"/>
+      <path d="M0 150 L0 132 L150 108 L300 130 L470 100 L640 128 L820 104 L1000 126 L1000 150 Z" fill="#eaf0ec"/>
+      <text class="nombre" x="260" y="38">Sierra Nevada</text>
+      <text class="nombre" x="440" y="23">Cundinamarca</text>
+      <text class="nombre" x="620" y="43">Valle del Cauca</text>
+      <text class="nombre" x="800" y="33">Antioquia</text>
+      <text class="nombre" x="90" y="53">Nariño</text>
+    </svg>
+  </header>
+
+  <main>
+    <div id="productos"></div>
+
+    <div class="carrito">
+      <h2>🧾 Carrito de Compras</h2>
+
+      <ul id="lista-carrito"></ul>
+
+      <div class="resumen">
+        <p>
+          Envío: <strong>Gratis</strong>
+        </p>
+
+        <p class="total">
+          Total: $<span id="total">0</span>
+        </p>
+      </div>
+
+      <button class="vaciar" onclick="vaciarCarrito()">
+        🧼 Vaciar Carrito
+      </button>
+
+      <button class="finalizar" onclick="finalizarCompra()">
+        ✅ Finalizar Compra
+      </button>
+    </div>
+  </main>
+
+  <!-- Aquí va tu <script> con vaciarCarrito(), finalizarCompra() y la carga de productos -->
+
+  </body>
+  </html>
+
+  <script>
+    const productos = [
+      {
+        id: 1,
+        nombre: "Sierra Nevada",
+        descripcion: "Inspirado en las cumbres más altas de Colombia. Mantiene tu café caliente como si lo acabaran de servir en la montaña, con un diseño resistente y sobrio para quienes buscan aventura en cada sorbo.",
+        precio: 99000,
+        imagen: "https://juanvaldez.vtexassets.com/arquivos/ids/157657-1200-auto?v=639240415818730000&width=1200&height=auto&aspect=true"
+      },
+      {
+        id: 2,
+        nombre: "Valle del cauca",
+        descripcion: "Fresco, vibrante y lleno de energía, como los paisajes del valle. Pensado para quienes disfrutan un café brillante y quieren llevar esa alegría a cualquier plan.",
+        precio: 99000,
+        imagen: "https://juanvaldez.vtexassets.com/arquivos/ids/156582-1200-auto?v=639240415819370000&width=1200&height=auto&aspect=true"
+      },
+      {
+        id: 3,
+        nombre: "Cundinamarca",
+        descripcion: "El compañero perfecto para las mañanas frías de la sabana. Un termo equilibrado y versátil, hecho para acompañarte del trabajo a la escapada de fin de semana sin perder la temperatura ni el aroma.",
+        precio: 99000,
+        imagen: "https://juanvaldez.vtexassets.com/arquivos/ids/156580-1200-auto?v=639240415819200000&width=1200&height=auto&aspect=true"
+      },
+      {
+        id: 4,
+        nombre: "Antioquia",
+        descripcion: "Tradición paisa en tu mano. Un termo con carácter cálido y cercano, ideal para compartir un buen tinto en familia o en el camino, con la calidez de la arriería en cada taza.",
+        precio: 99000,
+        imagen: "https://juanvaldez.vtexassets.com/arquivos/ids/156581-1200-auto?v=639240415819370000&width=1200&height=auto&aspect=true"
+      },
+      {
+        id: 5,
+        nombre: "Nariño",
+        descripcion: "Inspirado en las alturas del sur del país, donde nacen cafés de especialidad. Un termo para los amantes del buen café que valoran cada detalle y quieren conservar todo su sabor.",
+        precio: 99000,
+        imagen: "https://juanvaldez.vtexassets.com/arquivos/ids/156404-1200-auto?v=639240415818900000&width=1200&height=auto&aspect=true"
+      }
+    ];
+
+
+    /* ==============================
+       CARRITO
+    ================================ */
+
+    const carrito = [];
+
+    const contenedorProductos = document.getElementById("productos");
+    const listaCarrito = document.getElementById("lista-carrito");
+    const totalCarrito = document.getElementById("total");
+
+
+    /* ==============================
+       MOSTRAR PRODUCTOS
+    ================================ */
+
+    function mostrarProductos() {
+
+      contenedorProductos.innerHTML = "";
+
+      productos.forEach(prod => {
+
+        const div = document.createElement("div");
+
+        div.className = "producto";
+
+        div.innerHTML = `
+          <img src="${prod.imagen}" alt="${prod.nombre}">
+
+          <h3>${prod.nombre}</h3>
+
+          <p class="descripcion">
+            ${prod.descripcion}
+          </p>
+
+          <p class="precio">
+            ${prod.precio.toLocaleString("es-CO", {
+              style: "currency",
+              currency: "COP",
+              minimumFractionDigits: 0
+            })}
+          </p>
+
+          <button onclick="agregarAlCarrito(${prod.id})">
+            Agregar al carrito
+          </button>
+        `;
+
+        contenedorProductos.appendChild(div);
+
+      });
+
+    }
+
+
+    /* ==============================
+       AGREGAR AL CARRITO
+    ================================ */
+
+    function agregarAlCarrito(id) {
+
+      const productoExistente =
+        carrito.find(p => p.id === id);
+
+      if (productoExistente) {
+
+        productoExistente.cantidad++;
+
+      } else {
+
+        const producto =
+          productos.find(p => p.id === id);
+
+        carrito.push({
+          ...producto,
+          cantidad: 1
+        });
+
+      }
+
+      actualizarCarrito();
+
+    }
+
+
+    /* ==============================
+       ACTUALIZAR CARRITO
+    ================================ */
+
+    function actualizarCarrito() {
+
+      listaCarrito.innerHTML = "";
+
+      let total = 0;
+      let totalItems = 0;
+
+      carrito.forEach(item => {
+
+        const li =
+          document.createElement("li");
+
+        const subtotal =
+          item.precio * item.cantidad;
+
+        li.textContent =
+          `${item.nombre} x${item.cantidad} — ` +
+          subtotal.toLocaleString("es-CO", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 0
+          });
+
+        listaCarrito.appendChild(li);
+
+        total += subtotal;
+        totalItems += item.cantidad;
+
+      });
+
+      totalCarrito.textContent =
+        total.toLocaleString("es-CO");
+
+      actualizarTituloCarrito(totalItems);
+
+    }
+
+
+    /* ==============================
+       CONTADOR DEL CARRITO
+    ================================ */
+
+    function actualizarTituloCarrito(cantidad) {
+
+      const titulo =
+        document.querySelector(".carrito h2");
+
+      titulo.textContent =
+        `🧾 Carrito de Compras (${cantidad})`;
+
+    }
+
+
+    /* ==============================
+       VACIAR CARRITO
+    ================================ */
+
+    function vaciarCarrito() {
+
+      if (carrito.length === 0) {
+
+        alert("🛒 El carrito ya está vacío.");
+
+        return;
+
+      }
+
+      if (
+        confirm(
+          "¿Estás seguro de que quieres vaciar el carrito?"
+        )
+      ) {
+
+        carrito.length = 0;
+
+        actualizarCarrito();
+
+      }
+
+    }
+
+
+    /* ==============================
+       FINALIZAR COMPRA
+    ================================ */
+
+    function finalizarCompra() {
+
+      if (carrito.length === 0) {
+
+        alert(
+          "🛒 Tu carrito está vacío. Agrega productos antes de finalizar la compra."
+        );
+
+        return;
+
+      }
+
+      alert(
+        "🎉 ¡Pedido simulado confirmado!\n\n" +
+        "En un eCommerce real, ahora entrarían en acción " +
+        "el backend, la pasarela de pago y la logística."
+      );
+
+      carrito.length = 0;
+
+      actualizarCarrito();
+
+    }
+
+
+    /* ==============================
+       INICIAR TIENDA
+    ================================ */
+
+    mostrarProductos();
+  </script>
+</body>
+</html>
